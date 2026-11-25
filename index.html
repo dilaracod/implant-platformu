@@ -1,240 +1,779 @@
 <!DOCTYPE html>
+
 <html lang="tr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İmplant Bilgi Platformu</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>İmplant Bilgi Platformu</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
+
 <body>
 
-    <!-- Üst Menü -->
-    <header class="header">
-        <div class="header-left">
-            <button class="hamburger-btn" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            
-            <div class="profile-container">
-                <div class="profile-circle" id="profileBtn">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="profile-dropdown" id="profileDropdown">
-                    <div class="user-info">
-                        <strong>Kullanıcı Adı</strong>
-                        <span>email@universite.edu.tr</span>
-                    </div>
-                    <hr>
-                    <ul>
-                        <li id="openProfileSettingsFromDropdown"><i class="fa-solid fa-gear"></i> Hesap Ayarları</li>
-                        <li><i class="fa-solid fa-circle-question"></i> Yardım</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <div class="header-center">
-            <div class="search-wrapper">
-                <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" placeholder="Platformda bilgi ara...">
-            </div>
-        </div>
 
-        <div class="header-right">
-            <button class="login-btn" onclick="window.location.href='login.html'" id="mainLoginBtn">
-                <i class="fa-solid fa-right-to-bracket"></i> Giriş Yap
-            </button>
-        </div>
-    </header>
 
-    <!-- Ana Gövde -->
-    <div class="main-container">
-        
-        <!-- Sol Yan Menü (Ayarlar) -->
-        <aside class="settings-sidebar" id="sidebar">
-            <h2><i class="fa-solid fa-sliders"></i> Ayarlar</h2>
-            <ul>
-                <li id="openProfileSettings"><i class="fa-solid fa-id-card"></i> Profil Ayarları</li>
-                <li>
-                    <i class="fa-solid fa-palette"></i> Tema Seçenekleri
-                    <ul class="theme-options">
-                        <li id="lightModeBtn"><i class="fa-regular fa-sun"></i> Açık Mod</li>
-                        <li id="darkModeBtn"><i class="fa-regular fa-moon"></i> Koyu Mod</li>
-                    </ul>
-                </li>
-                <!-- GİZLİLİK BUTONU BURADA -->
-                <li id="openPrivacyBtn"><i class="fa-solid fa-shield-halved"></i> Gizlilik ve Veri Kontrolü</li>
-                <li id="logoutBtn"><i class="fa-solid fa-power-off"></i> Çıkış Yap</li>
-            </ul>
-        </aside>
+<!-- Üst Menü -->
 
-        <!-- ORTA PANEL: Büyük 3D Diş & İmplant Modeli Alanı -->
-        <main class="left-panel">
-            <div class="center-3d-wrapper">
-                <div class="center-3d-header">
-                    <div>
-                        <h3><i class="fa-solid fa-cube"></i> 3D Diş & İmplant İnceleme Alanı</h3>
-                        <span style="font-size: 13px; color: #64748b;">Modeli döndürmek, incelemek ve simülasyonu görmek için fare ile sürükleyin</span>
-                    </div>
-                </div>
+<header class="header">
 
-            <!-- 3D Model Orta Panelde Tam Alan -->
-                <div class="iframe-container">
-                    <iframe 
-                        src="https://implant-wise-ai-dental-platform.vercel.app/" 
-                        class="center-model-iframe"
-                        title="3D İmplant Modeli"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-        </main>
+<div class="header-left">
 
-        <!-- Sağ Panel: Sadece Yapay Zeka Asistanı -->
-        <aside class="right-panel" id="rightPanel">
-            <div class="right-panel-header">
-                <span><i class="fa-solid fa-robot"></i> Yapay Zeka Asistanı</span>
-                <i class="fa-solid fa-arrow-right-to-bracket arrow-icon" id="togglePanelBtn"></i>
-            </div>
-            
-            <div class="chat-history" id="chatHistory">
-                <div class="message ai-message">
-                    Merhaba! Ben diş sağlığı yapay zeka asistanınızım. İmplantlar hakkında ne öğrenmek istersiniz?
-                </div>
-            </div>
+<button class="hamburger-btn" id="menuToggle">
 
-            <div class="ai-search-wrapper">
-                <input type="text" placeholder="Yapay zekaya sorun..." id="aiInput">
-                <button id="aiSendBtn"><i class="fa-solid fa-paper-plane"></i></button>
-            </div>
-        </aside>
+<span></span>
 
-    </div>
+<span></span>
 
-    <!-- Profil Ayarları Modalı -->
-    <div id="profileModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Profil Ayarları</h2>
-                <button class="close-modal" id="closeProfileModal">&times;</button>
-            </div>
-            <div class="modal-body">
-                
-                <div class="profile-avatar-upload">
-                    <div class="avatar-preview" id="avatarPreviewContainer">
-                        <i class="fa-solid fa-user" id="defaultAvatarIcon"></i>
-                        <img id="profileAvatarImg" src="" alt="Profil" style="display:none; width:100%; height:100%; border-radius:50%; object-fit:cover;">
-                    </div>
-                    <label for="avatarUpload" class="upload-btn">Fotoğraf Yükle</label>
-                    <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
-                </div>
+<span></span>
 
-                <form id="profileUpdateForm">
-                    <div class="input-group">
-                        <label>İsim Soyisim</label>
-                        <input type="text" id="updateName" required>
-                    </div>
-                    <div class="input-group">
-                        <label>E-posta Adresi</label>
-                        <input type="email" id="updateEmail" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Mevcut Rol</label>
-                        <input type="text" id="updateRole" disabled>
-                    </div>
-                    <div class="input-group">
-                        <label>Yeni Şifre (İsteğe Bağlı)</label>
-                        <input type="password" id="updatePassword" placeholder="Değiştirmek istemiyorsanız boş bırakın">
-                    </div>
+</button>
 
-                    <div style="margin-top: 25px; margin-bottom: 15px;">
-                        <h3 style="color: var(--primary-color); border-bottom: 1px solid var(--border-color); padding-bottom: 8px; font-size: 15px;">Sağlık & Diş Durumunuz</h3>
-                    </div>
+<button type="button" id="openEducationBtn" class="edu-floating-btn">
 
-                    <div class="input-group">
-                        <label>Yaşınız</label>
-                        <input type="number" id="updateAge" min="1" max="120" placeholder="Yaşınızı yazınız (Örn: 35)">
-                    </div>
+<i class="fa-solid fa-graduation-cap"></i>
 
-                    <div class="input-group">
-                        <label>Eksik dişiniz var mı?</label>
-                        <select id="updateMissingTeeth">
-                            <option value="Belirtilmedi">Seçmek İstemiyorum</option>
-                            <option value="Yok">Hayır, yok</option>
-                            <option value="1-2 Diş">1 veya 2 adet eksik</option>
-                            <option value="3 ve daha fazla">3 ve daha fazla eksik</option>
-                            <option value="Tam dişsizlik">Tam dişsizlik (Hiç dişim yok)</option>
-                        </select>
-                    </div>
+<span data-i18n="educationCards">Eğitim Kartları</span>
 
-                    <div class="input-group">
-                        <label>Kronik bir rahatsızlığınız var mı?</label>
-                        <select id="updateChronicDiseaseSelect">
-                            <option value="Belirtilmedi">Seçmek İstemiyorum</option>
-                            <option value="Yok">Hayır, yok</option>
-                            <option value="Var">Evet, var</option>
-                        </select>
-                    </div>
+</button>
 
-                    <div class="input-group" id="chronicDiseaseDetailGroup" style="display: none;">
-                        <label>Lütfen rahatsızlığınızı belirtiniz (Diyabet, Tansiyon vb.):</label>
-                        <input type="text" id="updateChronicDiseaseDetail" placeholder="Rahatsızlığınızı buraya yazınız">
-                    </div>
 
-                    <div class="input-group">
-                        <label>Sigara kullanıyor musunuz?</label>
-                        <select id="updateSmoking">
-                            <option value="Belirtilmedi">Seçmek İstemiyorum</option>
-                            <option value="Kullanmıyorum">Kullanmıyorum</option>
-                            <option value="Kullanıyorum">Kullanıyorum</option>
-                        </select>
-                    </div>
+<div class="profile-container">
 
-                    <button type="submit" class="submit-btn">Değişiklikleri Kaydet</button>
-                </form>
-            </div>
-        </div>
-    </div>
+<div class="profile-circle" id="profileBtn">
 
-    <!-- GİZLİLİK VE VERİ KONTROL MODALI -->
-    <div id="privacyModal" class="modal-overlay">
-        <div class="modal-content" style="width: 550px;">
-            <div class="modal-header">
-                <h2><i class="fa-solid fa-shield-halved"></i> Gizlilik ve Veri Kontrolü</h2>
-                <button class="close-modal" id="closePrivacyModal">&times;</button>
-            </div>
-            
-            <div class="modal-body" style="max-height: 65vh; overflow-y: auto; font-size: 14px; line-height: 1.6; color: var(--text-dark);">
-                
-                <h3 style="color: var(--primary-color); margin-top: 0;">1. KVKK ve Veri İşleme Politikası</h3>
-                <p>İmplant Bilgi Platformu; yaşınız, eksik diş durumunuz ve kronik rahatsızlıklarınız gibi sağlık verilerinizi size yapay zeka destekli, kişiselleştirilmiş doğru bilgiler sunmak amacıyla talep eder. Verileriniz tamamen <strong>cihazınızın yerel hafızasında (Local Storage)</strong> şifrelenerek tutulur ve asla üçüncü şahıslara veya dış sunuculara satılmaz.</p>
-                
-                <h3 style="color: var(--primary-color);">2. Yapay Zeka (Gemini) Gizliliği</h3>
-                <p>Sağ paneldeki yapay zeka asistanına ilettiğiniz mesajlar anlık olarak işlenir. Mahremiyetiniz için sisteme T.C. kimlik numarası veya iletişim bilgisi gibi hassas veriler girmemeniz tavsiye edilir. Asistanla olan konuşmalarınızı dilediğiniz an aşağıdan kalıcı olarak temizleyebilirsiniz.</p>
+<i class="fa-solid fa-user"></i>
 
-                <h3 style="color: var(--primary-color);">3. Unutulma Hakkı</h3>
-                <p>Platformumuz "Unutulma Hakkı"na saygı duyar. Aşağıdaki butonları kullanarak tüm verilerinizi, profilinizi ve sohbet geçmişinizi sistemden kalıcı olarak silebilirsiniz.</p>
-                
-                <hr style="border: none; border-top: 1px solid var(--border-color); margin: 25px 0;">
-                
-                <h3 style="color: var(--primary-color); margin-top: 0; text-align: center;">Veri Kontrol Merkezi</h3>
-                
-                <!-- KONTROL MERKEZİ BUTONLARI -->
-                <button id="clearChatHistoryBtn" class="action-btn warning-btn">
-                    <i class="fa-solid fa-broom"></i> Yapay Zeka Sohbet Geçmişini Temizle
-                </button>
-                
-                <button id="deleteAccountBtn" class="action-btn danger-btn">
-                    <i class="fa-solid fa-trash-can"></i> Hesabımı ve Tüm Verilerimi Sil
-                </button>
+</div>
 
-            </div>
-        </div>
-    </div>
+<div class="profile-dropdown" id="profileDropdown">
 
-    <script src="script.js"></script>
+<div class="user-info">
+
+<strong>Kullanıcı Adı</strong>
+
+<span>email@universite.edu.tr</span>
+
+</div>
+
+<hr>
+
+<ul>
+
+<li id="openProfileSettingsFromDropdown"><i class="fa-solid fa-gear"></i> Hesap Ayarları</li>
+
+<li><i class="fa-solid fa-circle-question"></i> Yardım</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+</div>
+
+<div class="profile-dropdown" id="profileDropdown">
+
+<div class="user-info">
+
+<strong>Kullanıcı Adı</strong>
+
+<span>email@universite.edu.tr</span>
+
+</div>
+
+<hr>
+
+<ul>
+
+<li id="openProfileSettingsFromDropdown"><i class="fa-solid fa-gear"></i> Hesap Ayarları</li>
+
+<li><i class="fa-solid fa-circle-question"></i> Yardım</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="header-center">
+
+<div class="search-wrapper">
+
+<i class="fa-solid fa-magnifying-glass search-icon"></i>
+
+<input type="text" placeholder="Platformda bilgi ara...">
+
+</div>
+
+</div>
+
+
+
+<div class="header-right">
+
+<button type="button" id="langToggleBtn" class="lang-switch-btn" title="Dil Değiştir / Switch Language">
+
+<i class="fa-solid fa-globe"></i>
+
+<span id="currentLangLabel">TR</span>
+
+</button>
+
+<button class="login-btn" onclick="window.location.href='login.html'" id="mainLoginBtn">
+
+<i class="fa-solid fa-right-to-bracket"></i> Giriş Yap
+
+</button>
+
+</div>
+
+</header>
+
+
+
+<!-- Ana Gövde -->
+
+<div class="main-container">
+
+
+<!-- Sol Yan Menü (Ayarlar) -->
+
+<aside class="settings-sidebar" id="sidebar">
+
+<h2><i class="fa-solid fa-sliders"></i> Ayarlar</h2>
+
+<ul>
+
+<li id="openProfileSettings"><i class="fa-solid fa-id-card"></i> Profil Ayarları</li>
+
+<li>
+
+<i class="fa-solid fa-palette"></i> Tema Seçenekleri
+
+<ul class="theme-options">
+
+<li id="lightModeBtn"><i class="fa-regular fa-sun"></i> Açık Mod</li>
+
+<li id="darkModeBtn"><i class="fa-regular fa-moon"></i> Koyu Mod</li>
+
+</ul>
+
+</li>
+
+<!-- GİZLİLİK BUTONU BURADA -->
+
+<li id="openPrivacyBtn"><i class="fa-solid fa-shield-halved"></i> Gizlilik ve Veri Kontrolü</li>
+
+<li id="logoutBtn"><i class="fa-solid fa-power-off"></i> Çıkış Yap</li>
+
+</ul>
+
+</aside>
+
+
+
+<!-- ORTA PANEL: Büyük 3D Diş & İmplant Modeli Alanı -->
+
+<main class="left-panel">
+
+<div class="center-3d-wrapper">
+
+<div class="center-3d-header">
+
+<div>
+
+<h3><i class="fa-solid fa-cube"></i> 3D Diş & İmplant İnceleme Alanı</h3>
+
+<span style="font-size: 13px; color: #64748b;">Modeli döndürmek, incelemek ve simülasyonu görmek için fare ile sürükleyin</span>
+
+</div>
+
+</div>
+
+
+
+<!-- 3D Model Orta Panelde Tam Alan -->
+
+<div class="iframe-container">
+
+<iframe
+
+src="https://implant-wise-ai-dental-platform.vercel.app/"
+
+class="center-model-iframe"
+
+title="3D İmplant Modeli"
+
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+
+allowfullscreen>
+
+</iframe>
+
+</div>
+
+</main>
+
+
+
+<!-- Sağ Panel: Sadece Yapay Zeka Asistanı -->
+
+<aside class="right-panel" id="rightPanel">
+
+<div class="right-panel-header">
+
+<span><i class="fa-solid fa-robot"></i> Yapay Zeka Asistanı</span>
+
+<i class="fa-solid fa-arrow-right-to-bracket arrow-icon" id="togglePanelBtn"></i>
+
+</div>
+
+
+<div class="chat-history" id="chatHistory">
+
+<div class="message ai-message">
+
+Merhaba! Ben diş sağlığı yapay zeka asistanınızım. İmplantlar hakkında ne öğrenmek istersiniz?
+
+</div>
+
+</div>
+
+
+
+<div class="ai-search-wrapper">
+
+<input type="text" placeholder="Yapay zekaya sorun..." id="aiInput">
+
+<button id="aiSendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+
+</div>
+
+</aside>
+
+
+
+</div>
+
+
+
+<!-- Profil Ayarları Modalı -->
+
+<div id="profileModal" class="modal-overlay">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h2>Profil Ayarları</h2>
+
+<button class="close-modal" id="closeProfileModal">&times;</button>
+
+</div>
+
+<div class="modal-body">
+
+
+<div class="profile-avatar-upload">
+
+<div class="avatar-preview" id="avatarPreviewContainer">
+
+<i class="fa-solid fa-user" id="defaultAvatarIcon"></i>
+
+<img id="profileAvatarImg" src="" alt="Profil" style="display:none; width:100%; height:100%; border-radius:50%; object-fit:cover;">
+
+</div>
+
+<label for="avatarUpload" class="upload-btn">Fotoğraf Yükle</label>
+
+<input type="file" id="avatarUpload" accept="image/*" style="display: none;">
+
+</div>
+
+
+
+<form id="profileUpdateForm">
+
+<div class="input-group">
+
+<label>İsim Soyisim</label>
+
+<input type="text" id="updateName" required>
+
+</div>
+
+<div class="input-group">
+
+<label>E-posta Adresi</label>
+
+<input type="email" id="updateEmail" required>
+
+</div>
+
+<div class="input-group">
+
+<label>Mevcut Rol</label>
+
+<input type="text" id="updateRole" disabled>
+
+</div>
+
+<div class="input-group">
+
+<label>Yeni Şifre (İsteğe Bağlı)</label>
+
+<input type="password" id="updatePassword" placeholder="Değiştirmek istemiyorsanız boş bırakın">
+
+</div>
+
+
+
+<div style="margin-top: 25px; margin-bottom: 15px;">
+
+<h3 style="color: var(--primary-color); border-bottom: 1px solid var(--border-color); padding-bottom: 8px; font-size: 15px;">Sağlık & Diş Durumunuz</h3>
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>Yaşınız</label>
+
+<input type="number" id="updateAge" min="1" max="120" placeholder="Yaşınızı yazınız (Örn: 35)">
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>Eksik dişiniz var mı?</label>
+
+<select id="updateMissingTeeth">
+
+<option value="Belirtilmedi">Seçmek İstemiyorum</option>
+
+<option value="Yok">Hayır, yok</option>
+
+<option value="1-2 Diş">1 veya 2 adet eksik</option>
+
+<option value="3 ve daha fazla">3 ve daha fazla eksik</option>
+
+<option value="Tam dişsizlik">Tam dişsizlik (Hiç dişim yok)</option>
+
+</select>
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>Kronik bir rahatsızlığınız var mı?</label>
+
+<select id="updateChronicDiseaseSelect">
+
+<option value="Belirtilmedi">Seçmek İstemiyorum</option>
+
+<option value="Yok">Hayır, yok</option>
+
+<option value="Var">Evet, var</option>
+
+</select>
+
+</div>
+
+
+
+<div class="input-group" id="chronicDiseaseDetailGroup" style="display: none;">
+
+<label>Lütfen rahatsızlığınızı belirtiniz (Diyabet, Tansiyon vb.):</label>
+
+<input type="text" id="updateChronicDiseaseDetail" placeholder="Rahatsızlığınızı buraya yazınız">
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>Sigara kullanıyor musunuz?</label>
+
+<select id="updateSmoking">
+
+<option value="Belirtilmedi">Seçmek İstemiyorum</option>
+
+<option value="Kullanmıyorum">Kullanmıyorum</option>
+
+<option value="Kullanıyorum">Kullanıyorum</option>
+
+</select>
+
+</div>
+
+
+
+<button type="submit" class="submit-btn">Değişiklikleri Kaydet</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- EĞİTİM KARTLARI MODALI (TAM SAYFA) -->
+
+<div id="educationModal" class="modal-overlay edu-fullscreen-overlay">
+
+<div class="modal-content edu-fullscreen-box">
+
+<div class="modal-header">
+
+<h2><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="eduModalTitle">İmplant Eğitim Kartları</span></h2>
+
+<button type="button" class="close-modal" id="closeEducationModal">&times;</button>
+
+</div>
+
+<div class="modal-body edu-fullscreen-body">
+
+<p class="edu-intro-note" data-i18n="eduIntroNote">
+
+İmplant formları ve kullanıldığı klinik/anatomik durumlar hakkında bilgilendirme kartlarıdır; kesin planlama diş hekimi değerlendirmesiyle yapılır.
+
+</p>
+
+<!-- KATEGORİ 0: Temel İmplant Bilgileri (4 Kart) -->
+
+<h3 class="edu-category-title" data-i18n="eduCat0Title">Temel İmplant Bilgileri (4 Kart)</h3>
+
+<div class="edu-cards-grid">
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat0Badge">Temel Bilgi</span>
+
+<h4 data-i18n="c0_t1">İmplant Nedir?</h4>
+
+<p data-i18n="c0_d1">Eksik diş kökünün yerini alan, biyouyumlu (genellikle titanyum veya zirkonyum) yapay diş köküdür; doğal diş görünümü ve çiğneme fonksiyonuna destek sağlar.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c0_u1">Çürük, travma, periodontal hastalık veya diş gelişim eksikliğine bağlı tek diş, çoklu diş ya da tam dişsizlik durumlarında değerlendirilir.</span></div>
+
+</div>
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat0Badge">Temel Bilgi</span>
+
+<h4 data-i18n="c0_t2">Tedavi Süreci ve Aşamaları</h4>
+
+<p data-i18n="c0_d2">Klinik muayene ve radyolojik/3D değerlendirme sonrası implant yerleştirilir, kemikle kaynaşma (osseointegrasyon) süreci beklenir ve üst yapı protez tamamlanır.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c0_u2">Tedavi planı; eksik diş sayısı, çene kemiği durumu ve sistemik sağlık bulgularına göre hekim tarafından aşamalandırılır.</span></div>
+
+</div>
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat0Badge">Temel Bilgi</span>
+
+<h4 data-i18n="c0_t3">Kemik Yapısı ve Uygunluk</h4>
+
+<p data-i18n="c0_d3">Çene kemiğinin genişliği, yüksekliği ve yoğunluğu implant planlamasında önemlidir; yetersiz kemik hacminde ek cerrahi yaklaşımlar değerlendirilebilir.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c0_u3">Diş çekimi sonrası kemik rezorpsiyonu, kontrolsüz diyabet veya sigara kullanımı gibi durumlarda risk ve uygunluk hekimce ayrıca incelenir.</span></div>
+
+</div>
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat0Badge">Temel Bilgi</span>
+
+<h4 data-i18n="c0_t4">Günlük Bakım ve Uzun Ömür</h4>
+
+<p data-i18n="c0_d4">Düzenli diş fırçalama, arayüz temizliği ve hekim kontrolleri çevre dokuların sağlığını koruyarak implantın uzun süreli kullanımını destekler.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c0_u4">Peri-implant mukozit ve peri-implantitis gibi doku iltihaplarının önlenmesi için düzenli ağız hijyeni ve kontrol muayeneleri kritik önem taşır.</span></div>
+
+</div>
+
+</div>
+
+<!-- KATEGORİ 1: 1. Kemik İçi (Endosteal) (6 Form) -->
+
+<h3 class="edu-category-title" data-i18n="eduCat1Title">1. Kemik İçi (Endosteal) (6 Form)</h3>
+
+<div class="edu-cards-grid">
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat1Badge">1. Kemik İçi (Endosteal)</span>
+
+<h4 data-i18n="c1_t1">Silindirik (Paralel Duvarlı) Vidalı İmplant</h4>
+
+<p data-i18n="c1_d1">Boydan uca paralel vida formuna sahip, uygun kemik genişliği ve yüksekliğinde dengeli tutunma sağlayan yaygın implant formudur.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c1_u1">Çürük, travma veya periodontal nedenlerle oluşan tek ya da çoklu diş eksikliklerinde, kemik kalınlığının yeterli olduğu vakalarda değerlendirilir.</span></div>
+
+</div>
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat1Badge">1. Kemik İçi (Endosteal)</span>
+
+<h4 data-i18n="c1_t2">Konik (Kök Formlu) İmplant</h4>
+
+<p data-i18n="c1_d2">Doğal diş köküne benzer şekilde apikale doğru daralan, kök anatomisine uyum ve kademeli sıkışma sunan formdur.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c1_u2">Çekim sonrası soketlere veya komşu kök eğimlerinin ya da anatomik girintilerin bulunduğu diş eksikliklerinde tercih edilir.</span></div>
+
+</div>
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat1Badge">1. Kemik İçi (Endosteal)</span>
+
+<h4 data-i18n="c1_t3">Hibrit Gövdeli İmplant</h4>
+
+<p data-i18n="c1_d3">Üst kısmı silindirik, alt kısmı konik geometrili yapısıyla farklı kemik bölgelerinde esnek yerleşim sağlayan formdur.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c1_u3">Kemik yoğunluğunun bölgeden bölgeye değiştiği (kortikal ve trabeküler yapının farklılaştığı) kısmi diş eksikliklerinde kullanılır.</span></div>
+
+</div>
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat1Badge">1. Kemik İçi (Endosteal)</span>
+
+<h4 data-i18n="c1_t4">Vidasız Silindirik (Press-Fit) İmplant</h4>
+
+<p data-i18n="c1_d4">Vida yivi bulunmayan, kemik yuvasına uyum ve sürtünme ile yerleşen implant yaklaşımıdır.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c1_u4">Uygun kemik yatağına sahip seçili diş eksikliklerinde mekanik uyum hedefiyle planlanır.</span></div>
+
+</div>
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat1Badge">1. Kemik İçi (Endosteal)</span>
+
+<h4 data-i18n="c1_t5">Blade (Bıçak / Plaka) İmplant</h4>
+
+<p data-i18n="c1_d5">Dar çene kretleri için kemik dokusuna yerleştirilen yassı plaka formundaki gövde yapısıdır.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c1_u5">Yatay yönde daralmış (ince) çene kemiği nedeniyle standart silindirik implantın sığmadığı bölgesel diş eksikliklerinde değerlendirilir.</span></div>
+
+</div>
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat1Badge">1. Kemik İçi (Endosteal)</span>
+
+<h4 data-i18n="c1_t6">Kısa ve Mini İmplantlar</h4>
+
+<p data-i18n="c1_d6">Dikey kemik yüksekliğinin sınırlı olduğu durumlarda tercih edilen kısa gövdeli veya ince çaplı seçeneklerdir.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c1_u6">Kemik erimesine (rezorpsiyon) veya sinüs/sinir yakınlığına bağlı dikey kemik yüksekliği azalmış olgularda ya da dar aralıklı diş eksikliklerinde kullanılır.</span></div>
+
+</div>
+
+</div>
+
+<!-- KATEGORİ 2: 2. Özel Kafes, Plaka & Doku İçi (4 Form) -->
+
+<h3 class="edu-category-title" data-i18n="eduCat2Title">2. Özel Kafes, Plaka & Doku İçi (4 Form)</h3>
+
+<div class="edu-cards-grid">
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat2Badge">2. Özel Kafes, Plaka & Doku İçi</span>
+
+<h4 data-i18n="c2_t1">Subperiostal (Kafes / Kemik Üstü) Yapılar</h4>
+
+<p data-i18n="c2_d1">Kemik içine vidalanmak yerine kemik yüzeyinin üzerine, diş etinin altına oturan özel kafes/iskelet tasarımlardır.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c2_u1">İleri kemik kaybı bulunan ve kemik içi implant için yeterli kemik hacmi olmayan seçili parsiyel veya total dişsizlik durumlarında gündeme gelir.</span></div>
+
+</div>
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat2Badge">2. Özel Kafes, Plaka & Doku İçi</span>
+
+<h4 data-i18n="c2_t2">Kişiye Özel Plaka ve Kafes Sistemleri</h4>
+
+<p data-i18n="c2_d2">İleri kemik kayıplarında anatomiye uyumlu olarak planlanan plaka veya kafes destekli rekonstrüksiyon yaklaşımlarıdır.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c2_u2">Travma, tümör rezeksiyonu veya ileri alveoler kemik kaybı sonrası anatomik bütünlüğün desteklenmesi gereken vakalarda değerlendirilir.</span></div>
+
+</div>
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat2Badge">2. Özel Kafes, Plaka & Doku İçi</span>
+
+<h4 data-i18n="c2_t3">İntramukozal (Doku İçi) Tutucular</h4>
+
+<p data-i18n="c2_d3">Kemik yerine diş eti mukozasının içindeki sığ yuvalara tutunan, protez stabilitesini destekleyen doku içi yapılardır.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c2_u3">Kemik desteğinin sınırlı olduğu hareketli veya tam protez kullanıcılarında protez tutuculuğuna ek destek sağlamak amacıyla tanımlanır.</span></div>
+
+</div>
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat2Badge">2. Özel Kafes, Plaka & Doku İçi</span>
+
+<h4 data-i18n="c2_t4">Özel Formlu Destek Yapıları</h4>
+
+<p data-i18n="c2_d4">Standart silindirik/konik formların dışında, vakanın anatomik sınırlarına göre tanımlanan özel form seçenekleridir.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c2_u4">Standart implant formlarının yerleşimine elverişli olmayan, kişiye özel anatomik sapmaların bulunduğu diş eksikliklerinde incelenir.</span></div>
+
+</div>
+
+</div>
+
+<!-- KATEGORİ 3: 3. İleri Anatomik Tutunma (3 Form) -->
+
+<h3 class="edu-category-title" data-i18n="eduCat3Title">3. İleri Anatomik Tutunma (3 Form)</h3>
+
+<div class="edu-cards-grid">
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat3Badge">3. İleri Anatomik Tutunma</span>
+
+<h4 data-i18n="c3_t1">Zigomatik Yaklaşımlar</h4>
+
+<p data-i18n="c3_d1">Üst çenede ileri kemik kaybı bulunan durumlarda tutunmanın elmacık kemiğinden (zigoma) sağlandığı ileri anatomik planlamalardır.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c3_u1">Üst çenede şiddetli kemik erimesi (maksiller atrofi) veya geniş sinüs pnömatizasyonu nedeniyle klasik implantların uygulanamadığı ileri dişsizlik vakalarında değerlendirilir.</span></div>
+
+</div>
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat3Badge">3. İleri Anatomik Tutunma</span>
+
+<h4 data-i18n="c3_t2">Pterigoid / Tuber Bölgesi Yaklaşımları</h4>
+
+<p data-i18n="c3_d2">Üst çene arka bölgesinde kemik yüksekliği yetersiz olduğunda pterigoid veya maksiller tüber bölgesinden destek alan yaklaşımlardır.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c3_u2">Üst çene arka bölgede ileri kemik kaybı ve sinüs sarkması bulunan diş eksikliklerinde alternatif arka destek sağlamak için planlanır.</span></div>
+
+</div>
+
+<div class="edu-card">
+
+<span class="edu-badge" data-i18n="eduCat3Badge">3. İleri Anatomik Tutunma</span>
+
+<h4 data-i18n="c3_t3">Transosteal / İleri Kemik Ankrajı</h4>
+
+<p data-i18n="c3_d3">İleri düzeyde kemik rezorpsiyonu olan özel olgularda alternatif anatomik tutunma noktalarını değerlendiren ileri yaklaşımlardır.</p>
+
+<div class="edu-indication"><strong data-i18n="indicationLabel">Kullanıldığı durum / hastalık:</strong> <span data-i18n="c3_u3">Ağır kemik kaybı veya önceki cerrahi ya da patolojik süreçlere bağlı ileri doku kayıplarında özel multidisipliner değerlendirmeyle ele alınır.</span></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- GİZLİLİK VE VERİ KONTROL MODALI -->
+
+<div id="privacyModal" class="modal-overlay">
+
+<div class="modal-content" style="width: 550px;">
+
+<div class="modal-header">
+
+<h2><i class="fa-solid fa-shield-halved"></i> Gizlilik ve Veri Kontrolü</h2>
+
+<button class="close-modal" id="closePrivacyModal">&times;</button>
+
+</div>
+
+
+<div class="modal-body" style="max-height: 65vh; overflow-y: auto; font-size: 14px; line-height: 1.6; color: var(--text-dark);">
+
+
+<h3 style="color: var(--primary-color); margin-top: 0;">1. KVKK ve Veri İşleme Politikası</h3>
+
+<p>İmplant Bilgi Platformu; yaşınız, eksik diş durumunuz ve kronik rahatsızlıklarınız gibi sağlık verilerinizi size yapay zeka destekli, kişiselleştirilmiş doğru bilgiler sunmak amacıyla talep eder. Verileriniz tamamen <strong>cihazınızın yerel hafızasında (Local Storage)</strong> şifrelenerek tutulur ve asla üçüncü şahıslara veya dış sunuculara satılmaz.</p>
+
+
+<h3 style="color: var(--primary-color);">2. Yapay Zeka (Gemini) Gizliliği</h3>
+
+<p>Sağ paneldeki yapay zeka asistanına ilettiğiniz mesajlar anlık olarak işlenir. Mahremiyetiniz için sisteme T.C. kimlik numarası veya iletişim bilgisi gibi hassas veriler girmemeniz tavsiye edilir. Asistanla olan konuşmalarınızı dilediğiniz an aşağıdan kalıcı olarak temizleyebilirsiniz.</p>
+
+
+
+<h3 style="color: var(--primary-color);">3. Unutulma Hakkı</h3>
+
+<p>Platformumuz "Unutulma Hakkı"na saygı duyar. Aşağıdaki butonları kullanarak tüm verilerinizi, profilinizi ve sohbet geçmişinizi sistemden kalıcı olarak silebilirsiniz.</p>
+
+
+<hr style="border: none; border-top: 1px solid var(--border-color); margin: 25px 0;">
+
+
+<h3 style="color: var(--primary-color); margin-top: 0; text-align: center;">Veri Kontrol Merkezi</h3>
+
+
+<!-- KONTROL MERKEZİ BUTONLARI -->
+
+<button id="clearChatHistoryBtn" class="action-btn warning-btn">
+
+<i class="fa-solid fa-broom"></i> Yapay Zeka Sohbet Geçmişini Temizle
+
+</button>
+
+
+<button id="deleteAccountBtn" class="action-btn danger-btn">
+
+<i class="fa-solid fa-trash-can"></i> Hesabımı ve Tüm Verilerimi Sil
+
+</button>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<script src="script.js"></script>
+
 </body>
+
 </html>
