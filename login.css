@@ -1,0 +1,115 @@
+/* --- RENK PALETİ (Soft Adaçayı Konsepti) --- */
+:root {
+    --bg-light: #FAFCFA;       /* Çok hafif yeşilimsi ferah arka plan */
+    --primary-color: #7CA982;  /* Soft adaçayı yeşili (Butonlar ve vurgular) */
+    --accent-color: #E0ECE4;   /* Açık yeşilimsi gri */
+    --text-dark: #2C3D30;      /* Çok koyu orman yeşili (Metin rengi) */
+    --panel-bg: #FFFFFF;       /* Form arka planı için saf beyaz */
+    --border-color: #D1E0D6;   /* Çizgiler için yumuşak yeşil-gri */
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-container {
+    background-color: var(--panel-bg);
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(44, 61, 48, 0.08); /* Hafif yeşilimsi yumuşak gölge */
+    overflow: hidden;
+}
+
+.auth-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    background: var(--bg-light);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    color: #888;
+}
+
+.tab-btn.active {
+    background: var(--panel-bg);
+    color: var(--primary-color);
+    font-weight: bold;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.auth-form {
+    display: none;
+    padding: 30px;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-form.active {
+    display: flex;
+}
+
+.auth-form h2 {
+    margin-top: 0;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 12px 12px 12px 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+}
+
+.input-group input:focus, .input-group select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(124, 169, 130, 0.3); /* Odaklanınca hafif yeşil parlama */
+}
+
+.submit-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: opacity 0.3s;
+}
+
+.submit-btn:hover {
+    opacity: 0.85;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap / Kayıt Ol</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <div class="auth-container">
+        <!-- Sekme Butonları -->
+        <div class="auth-tabs">
+            <button class="tab-btn active" id="tabLogin">Giriş Yap</button>
+            <button class="tab-btn" id="tabRegister">Kayıt Ol</button>
+        </div>
+
+        <!-- GİRİŞ YAP FORMU -->
+        <form id="formLogin" class="auth-form active">
+            <h2>Hoş Geldiniz</h2>
+            <div class="input-group">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="loginEmail" placeholder="E-posta Adresi" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="loginPassword" placeholder="Şifre" required>
+            </div>
+            <button type="submit" class="submit-btn">Giriş Yap</button>
+        </form>
+
+        <!-- KAYIT OL FORMU -->
+        <form id="formRegister" class="auth-form">
+            <h2>Hesap Oluştur</h2>
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="regName" placeholder="İsim Soyisim" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="regEmail" placeholder="E-posta Adresi" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="regPassword" placeholder="Şifre Belirle" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-user-tag"></i>
+                <div class="input-group">
+    <i class="fa-solid fa-user-tag"></i>
+    <select id="regRole" required>
+        <option value="" disabled selected>Rolünüzü Seçin</option>
+        <option value="Öğrenci">Öğrenci</option>
+        <option value="Diş Hekimi">Diş Hekimi</option>
+        <option value="Hasta">Hasta</option>
+        <option value="Ziyaretçi">Ziyaretçi</option>
+    </select>
+</div>
+            </div>
+            <button type="submit" class="submit-btn">Kayıt Ol</button>
+        </form>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

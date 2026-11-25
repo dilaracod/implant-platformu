@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İmplant Bilgi Platformu</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Üst Menü -->
+    <header class="header">
+        <div class="header-left">
+            <button class="hamburger-btn" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="profile-container">
+                <div class="profile-circle" id="profileBtn">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="user-info">
+                        <strong>Kullanıcı Adı</strong>
+                        <span>email@universite.edu.tr</span>
+                    </div>
+                    <hr>
+                    <ul>
+                        <li id="openProfileSettingsFromDropdown"><i class="fa-solid fa-gear"></i> Hesap Ayarları</li>
+                        <li><i class="fa-solid fa-circle-question"></i> Yardım</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-center">
+            <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" placeholder="Platformda bilgi ara...">
+            </div>
+        </div>
+
+        <div class="header-right">
+            <button class="login-btn" onclick="window.location.href='login.html'" id="mainLoginBtn">
+                <i class="fa-solid fa-right-to-bracket"></i> Giriş Yap
+            </button>
+        </div>
+    </header>
+
+    <!-- Ana Gövde -->
+    <div class="main-container">
+        
+        <!-- Sol Yan Menü (Ayarlar) -->
+        <aside class="settings-sidebar" id="sidebar">
+            <h2><i class="fa-solid fa-sliders"></i> Ayarlar</h2>
+            <ul>
+                <li id="openProfileSettings"><i class="fa-solid fa-id-card"></i> Profil Ayarları</li>
+                <li>
+                    <i class="fa-solid fa-palette"></i> Tema Seçenekleri
+                    <ul class="theme-options">
+                        <li id="lightModeBtn"><i class="fa-regular fa-sun"></i> Açık Mod</li>
+                        <li id="darkModeBtn"><i class="fa-regular fa-moon"></i> Koyu Mod</li>
+                    </ul>
+                </li>
+                <!-- GİZLİLİK BUTONU BURADA -->
+                <li id="openPrivacyBtn"><i class="fa-solid fa-shield-halved"></i> Gizlilik ve Veri Kontrolü</li>
+                <li id="logoutBtn"><i class="fa-solid fa-power-off"></i> Çıkış Yap</li>
+            </ul>
+        </aside>
+
+        <!-- ORTA PANEL: Büyük 3D Diş & İmplant Modeli Alanı -->
+        <main class="left-panel">
+            <div class="center-3d-wrapper">
+                <div class="center-3d-header">
+                    <div>
+                        <h3><i class="fa-solid fa-cube"></i> 3D Diş & İmplant İnceleme Alanı</h3>
+                        <span style="font-size: 13px; color: #64748b;">Modeli döndürmek, incelemek ve simülasyonu görmek için fare ile sürükleyin</span>
+                    </div>
+                </div>
+
+            <!-- 3D Model Orta Panelde Tam Alan -->
+                <div class="iframe-container">
+                    <iframe 
+                        src="https://implant-wise-ai-dental-platform.vercel.app/" 
+                        class="center-model-iframe"
+                        title="3D İmplant Modeli"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+        </main>
+
+        <!-- Sağ Panel: Sadece Yapay Zeka Asistanı -->
+        <aside class="right-panel" id="rightPanel">
+            <div class="right-panel-header">
+                <span><i class="fa-solid fa-robot"></i> Yapay Zeka Asistanı</span>
+                <i class="fa-solid fa-arrow-right-to-bracket arrow-icon" id="togglePanelBtn"></i>
+            </div>
+            
+            <div class="chat-history" id="chatHistory">
+                <div class="message ai-message">
+                    Merhaba! Ben diş sağlığı yapay zeka asistanınızım. İmplantlar hakkında ne öğrenmek istersiniz?
+                </div>
+            </div>
+
+            <div class="ai-search-wrapper">
+                <input type="text" placeholder="Yapay zekaya sorun..." id="aiInput">
+                <button id="aiSendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- Profil Ayarları Modalı -->
+    <div id="profileModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Profil Ayarları</h2>
+                <button class="close-modal" id="closeProfileModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="profile-avatar-upload">
+                    <div class="avatar-preview" id="avatarPreviewContainer">
+                        <i class="fa-solid fa-user" id="defaultAvatarIcon"></i>
+                        <img id="profileAvatarImg" src="" alt="Profil" style="display:none; width:100%; height:100%; border-radius:50%; object-fit:cover;">
+                    </div>
+                    <label for="avatarUpload" class="upload-btn">Fotoğraf Yükle</label>
+                    <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
+                </div>
+
+                <form id="profileUpdateForm">
+                    <div class="input-group">
+                        <label>İsim Soyisim</label>
+                        <input type="text" id="updateName" required>
+                    </div>
+                    <div class="input-group">
+                        <label>E-posta Adresi</label>
+                        <input type="email" id="updateEmail" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Mevcut Rol</label>
+                        <input type="text" id="updateRole" disabled>
+                    </div>
+                    <div class="input-group">
+                        <label>Yeni Şifre (İsteğe Bağlı)</label>
+                        <input type="password" id="updatePassword" placeholder="Değiştirmek istemiyorsanız boş bırakın">
+                    </div>
+
+                    <div style="margin-top: 25px; margin-bottom: 15px;">
+                        <h3 style="color: var(--primary-color); border-bottom: 1px solid var(--border-color); padding-bottom: 8px; font-size: 15px;">Sağlık & Diş Durumunuz</h3>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Yaşınız</label>
+                        <input type="number" id="updateAge" min="1" max="120" placeholder="Yaşınızı yazınız (Örn: 35)">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Eksik dişiniz var mı?</label>
+                        <select id="updateMissingTeeth">
+                            <option value="Belirtilmedi">Seçmek İstemiyorum</option>
+                            <option value="Yok">Hayır, yok</option>
+                            <option value="1-2 Diş">1 veya 2 adet eksik</option>
+                            <option value="3 ve daha fazla">3 ve daha fazla eksik</option>
+                            <option value="Tam dişsizlik">Tam dişsizlik (Hiç dişim yok)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Kronik bir rahatsızlığınız var mı?</label>
+                        <select id="updateChronicDiseaseSelect">
+                            <option value="Belirtilmedi">Seçmek İstemiyorum</option>
+                            <option value="Yok">Hayır, yok</option>
+                            <option value="Var">Evet, var</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group" id="chronicDiseaseDetailGroup" style="display: none;">
+                        <label>Lütfen rahatsızlığınızı belirtiniz (Diyabet, Tansiyon vb.):</label>
+                        <input type="text" id="updateChronicDiseaseDetail" placeholder="Rahatsızlığınızı buraya yazınız">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Sigara kullanıyor musunuz?</label>
+                        <select id="updateSmoking">
+                            <option value="Belirtilmedi">Seçmek İstemiyorum</option>
+                            <option value="Kullanmıyorum">Kullanmıyorum</option>
+                            <option value="Kullanıyorum">Kullanıyorum</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Değişiklikleri Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- GİZLİLİK VE VERİ KONTROL MODALI -->
+    <div id="privacyModal" class="modal-overlay">
+        <div class="modal-content" style="width: 550px;">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-shield-halved"></i> Gizlilik ve Veri Kontrolü</h2>
+                <button class="close-modal" id="closePrivacyModal">&times;</button>
+            </div>
+            
+            <div class="modal-body" style="max-height: 65vh; overflow-y: auto; font-size: 14px; line-height: 1.6; color: var(--text-dark);">
+                
+                <h3 style="color: var(--primary-color); margin-top: 0;">1. KVKK ve Veri İşleme Politikası</h3>
+                <p>İmplant Bilgi Platformu; yaşınız, eksik diş durumunuz ve kronik rahatsızlıklarınız gibi sağlık verilerinizi size yapay zeka destekli, kişiselleştirilmiş doğru bilgiler sunmak amacıyla talep eder. Verileriniz tamamen <strong>cihazınızın yerel hafızasında (Local Storage)</strong> şifrelenerek tutulur ve asla üçüncü şahıslara veya dış sunuculara satılmaz.</p>
+                
+                <h3 style="color: var(--primary-color);">2. Yapay Zeka (Gemini) Gizliliği</h3>
+                <p>Sağ paneldeki yapay zeka asistanına ilettiğiniz mesajlar anlık olarak işlenir. Mahremiyetiniz için sisteme T.C. kimlik numarası veya iletişim bilgisi gibi hassas veriler girmemeniz tavsiye edilir. Asistanla olan konuşmalarınızı dilediğiniz an aşağıdan kalıcı olarak temizleyebilirsiniz.</p>
+
+                <h3 style="color: var(--primary-color);">3. Unutulma Hakkı</h3>
+                <p>Platformumuz "Unutulma Hakkı"na saygı duyar. Aşağıdaki butonları kullanarak tüm verilerinizi, profilinizi ve sohbet geçmişinizi sistemden kalıcı olarak silebilirsiniz.</p>
+                
+                <hr style="border: none; border-top: 1px solid var(--border-color); margin: 25px 0;">
+                
+                <h3 style="color: var(--primary-color); margin-top: 0; text-align: center;">Veri Kontrol Merkezi</h3>
+                
+                <!-- KONTROL MERKEZİ BUTONLARI -->
+                <button id="clearChatHistoryBtn" class="action-btn warning-btn">
+                    <i class="fa-solid fa-broom"></i> Yapay Zeka Sohbet Geçmişini Temizle
+                </button>
+                
+                <button id="deleteAccountBtn" class="action-btn danger-btn">
+                    <i class="fa-solid fa-trash-can"></i> Hesabımı ve Tüm Verilerimi Sil
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
